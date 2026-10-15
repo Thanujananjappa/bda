@@ -1,0 +1,98 @@
+:root {
+  --bg: #0f1419;
+  --panel: #1a2332;
+  --text: #e7ecf3;
+  --muted: #8b9cb3;
+  --accent: #3d8bfd;
+  --warn: #f0a500;
+  --critical: #ff5c5c;
+  --ok: #2ecc71;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: radial-gradient(circle at 20% 0%, #1e2a3d, var(--bg));
+  color: var(--text);
+  min-height: 100vh;
+}
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 2rem 2.5rem;
+  border-bottom: 1px solid #2a3548;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.75rem;
+  color: var(--accent);
+  margin: 0 0 0.5rem;
+}
+
+h1 { margin: 0 0 0.5rem; font-size: 1.85rem; }
+.sub { color: var(--muted); max-width: 42rem; margin: 0; }
+
+.stats { display: flex; gap: 1rem; align-items: stretch; }
+.stat {
+  background: var(--panel);
+  border: 1px solid #2a3548;
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  min-width: 100px;
+  text-align: center;
+}
+.stat .num { display: block; font-size: 1.6rem; font-weight: 700; }
+.stat .lbl { color: var(--muted); font-size: 0.8rem; }
+
+main { padding: 1.5rem 2.5rem 3rem; }
+.panel {
+  background: var(--panel);
+  border: 1px solid #2a3548;
+  border-radius: 16px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.25rem;
+}
+.panel-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+.panel-head p { color: var(--muted); margin: 0; font-size: 0.9rem; }
+
+table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+th, td { text-align: left; padding: 0.75rem 0.5rem; border-bottom: 1px solid #2a3548; }
+th { color: var(--muted); font-weight: 600; font-size: 0.85rem; }
+
+tr.warn { background: rgba(240, 165, 0, 0.08); }
+tr.critical { background: rgba(255, 92, 92, 0.12); }
+
+.bar-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 140px;
+}
+.bar-wrap .bar {
+  height: 8px;
+  background: linear-gradient(90deg, var(--warn), var(--critical));
+  border-radius: 4px;
+  max-width: 80px;
+}
+
+.badge {
+  background: rgba(255, 92, 92, 0.2);
+  color: #ffb4b4;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+}
+
+.empty { color: var(--muted); }
+.api-list { color: var(--muted); }
+code { background: #0d1117; padding: 0.15rem 0.4rem; border-radius: 6px; }
+
+@media (max-width: 800px) {
+  .hero { flex-direction: column; }
+  .stats { flex-wrap: wrap; }
+}

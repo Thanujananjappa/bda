@@ -1,0 +1,20 @@
+{
+  "model": "dropout_classifier.joblib",
+  "roc_auc_holdout": 0.9991,
+  "positive_class": "dropout",
+  "training_rows": 4424,
+  "includes_stream_features": true,
+  "stream_metrics": [
+    "student_id",
+    "week",
+    "attendance_rate",
+    "avg_assignment_score",
+    "assignment_submit_ratio",
+    "latest_exam_score",
+    "cumulative_gpa_proxy",
+    "admission_grade",
+    "previous_qualification_grade",
+    "age_at_enrollment",
+    "daytime_attendance"
+  ]
+}

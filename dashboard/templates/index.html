@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Advisor Dashboard — Dropout Risk</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <p class="eyebrow">Student Performance & Dropout Risk</p>
+      <h1>Advisor follow-up queue</h1>
+      <p class="sub">Weekly classification scores from Kafka → HDFS pipeline. Flagged when risk ≥ {{ threshold }}.</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><span class="num">{{ data.flagged_count }}</span><span class="lbl">Flagged</span></div>
+      <div class="stat"><span class="num">{{ data.total_students }}</span><span class="lbl">Scored</span></div>
+      <div class="stat"><span class="num">{{ threshold }}</span><span class="lbl">Threshold</span></div>
+    </div>
+  </header>
+
+  <main>
+    <section class="panel">
+      <div class="panel-head">
+        <h2>Priority outreach</h2>
+        <p>Last run: {{ data.generated_at or "Not scored yet — run ml/weekly_scoring.py" }}</p>
+      </div>
+      {% if flagged %}
+      <table>
+        <thead>
+          <tr>
+            <th>Student ID</th>
+            <th>Week</th>
+            <th>Dropout risk</th>
+            <th>Status</th>
+            <th>Source</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for s in flagged %}
+          <tr class="{% if s.dropout_risk_score >= 0.8 %}critical{% elif s.dropout_risk_score >= threshold %}warn{% endif %}">
+            <td><code>{{ s.student_id }}</code></td>
+            <td>{{ s.week }}</td>
+            <td>
+              <div class="bar-wrap">
+                <div class="bar" style="width: {{ (s.dropout_risk_score * 100)|int }}%"></div>
+                <span>{{ "%.2f"|format(s.dropout_risk_score) }}</span>
+              </div>
+            </td>
+            <td><span class="badge">Advisor follow-up</span></td>
+            <td>{{ s.source }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <p class="empty">No flagged students in the latest score file.</p>
+      {% endif %}
+    </section>
+
+    <section class="panel">
+      <h2>API</h2>
+      <ul class="api-list">
+        <li><code GET /api/scores</code> — full weekly payload</li>
+        <li><code GET /api/flagged</code> — advisor queue only</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
