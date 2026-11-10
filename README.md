@@ -26,7 +26,7 @@ flowchart LR
 Use a **venv** so `kafka-python` is not confused with the unrelated PyPI `kafka` package:
 
 ```powershell
-cd C:\Users\thanu\student-dropout-risk-pipeline
+cd <folder_name>
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
