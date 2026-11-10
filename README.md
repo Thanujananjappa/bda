@@ -122,4 +122,4 @@ docker-compose.yml   Zookeeper, Kafka, NameNode, DataNode
 | Advisor platform (API + built UI) | 8080 |
 | Vite dev server | 5173 |
 
-See **docs/PROJECT_REPORT.md** for requirement mapping and viva notes.
+
